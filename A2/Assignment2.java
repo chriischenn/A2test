@@ -475,7 +475,7 @@ class PlaneSeat {
       //System.out.println("error");
     //}
 
-    boolean bookedF = a2.bookSeat(6, 10, "first");
+    boolean bookedF = a2.bookSeat(1, 6, "first");
     if (bookedF == true) {
       System.out.println("Booked Passenger 6 on flight 5");
     } else {
