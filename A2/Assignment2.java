@@ -206,7 +206,7 @@ public class Assignment2 {
         Timestamp actualDeparted;
         if (rs.next()) {// if flight is in departed, we keep checking if it has left yet
           actualDeparted = rs.getTimestamp("timestamp");
-          String getSched = "SELECT scheduled_departure " +
+          String getSched = "SELECT s_dep " +
           "FROM air_travel.flight " +
           "WHERE id = ?";
           PreparedStatement getSchedPS = connection.prepareStatement(getSched);
@@ -214,7 +214,7 @@ public class Assignment2 {
           ResultSet schedRS = getSchedPS.executeQuery();
           Timestamp schedDeparted;
           if (schedRS.next()) {
-            schedDeparted = schedRS.getTimestamp("scheduled_departure");
+            schedDeparted = schedRS.getTimestamp("s_dep");
 
             if (schedDeparted.before(actualDeparted)) {
               return false;
