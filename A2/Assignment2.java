@@ -460,9 +460,9 @@ class PlaneSeat {
 
   public static void main(String[] s) throws SQLException {
     System.out.println("Running the code!");
-    String url = "jdbc:postgresql://localhost:5432/csc343h-zhaobin6";
+    String url = "jdbc:postgresql://localhost:5432/csc343h-chenha53";
     Assignment2 a2 = new Assignment2();
-    if (a2.connectDB(url, "zhaobin6", "")) {
+    if (a2.connectDB(url, "chenha53", "")) {
       System.out.println("db connection successful");
     } else {
       System.out.println("db connection failed");
