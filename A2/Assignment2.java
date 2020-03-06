@@ -141,6 +141,7 @@ public class Assignment2 {
    * @param flightID  id of the flight
    * @param seatClass the class of the seat (economy, business, or first)
    * @return true if the booking was successful, false otherwise.
+ * @throws SQLException
    */
   public boolean bookSeat(int passID, int flightID, String seatClass) {
     // Implement this method!
@@ -197,15 +198,15 @@ public class Assignment2 {
         }
 
         //checking if departed
-        String getDeparted = "SELECT timestamp " +
-        "FROM air_travel.departed " +
+        String getDeparted = "SELECT datetime " +
+        "FROM air_travel.departure " +
         "WHERE flight_id = ?";
         PreparedStatement getDepartedPS = connection.prepareStatement(getDeparted);
         getDepartedPS.setInt(1, flightID);
         rs = getDepartedPS.executeQuery();
         Timestamp actualDeparted;
         if (rs.next()) {// if flight is in departed, we keep checking if it has left yet
-          actualDeparted = rs.getTimestamp("timestamp");
+          actualDeparted = rs.getTimestamp("datetime");
           String getSched = "SELECT s_dep " +
           "FROM air_travel.flight " +
           "WHERE id = ?";
@@ -305,9 +306,8 @@ public class Assignment2 {
         return true;
 
         }
-    }
-    catch (SQLException e) {
-        return false;
+    } catch (SQLException e) {
+      return false;
     }
 
     return false;
@@ -460,9 +460,9 @@ class PlaneSeat {
 
   public static void main(String[] s) throws SQLException {
     System.out.println("Running the code!");
-    String url = "jdbc:postgresql://localhost:5432/csc343h-chenha53";
+    String url = "jdbc:postgresql://localhost:5432/csc343h-zhaobin6";
     Assignment2 a2 = new Assignment2();
-    if (a2.connectDB(url, "chenha53", "")) {
+    if (a2.connectDB(url, "zhaobin6", "")) {
       System.out.println("db connection successful");
     } else {
       System.out.println("db connection failed");
@@ -475,7 +475,7 @@ class PlaneSeat {
       //System.out.println("error");
     //}
 
-    boolean bookedF = a2.bookSeat(1, 6, "first");
+    boolean bookedF = a2.bookSeat(6, 10, "first");
     if (bookedF == true) {
       System.out.println("Booked Passenger 6 on flight 5");
     } else {
